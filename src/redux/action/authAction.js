@@ -11,7 +11,7 @@ export const login = (email, password)=> {
 
     const config = {
         headers : {
-            'Content-type' : 'Application/json'
+            'Content-type' : 'Application/json' 
         }
     }
     const body = JSON.stringify({

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {StyleSheet,View,TextInput,Text, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback,Keyboard} from 'react-native';
+import {StyleSheet,View,TextInput,Text, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {colors} from '../../style';
@@ -19,7 +19,7 @@ class LoginScreen extends React.Component{
 
    async handleSubmit(){  
       //const {email,password}=this.state;
-      await this.props.login(this.state.email,this.state.password)
+     // await this.props.login(this.state.email,this.state.password)
       this.props.navigation.navigate("home") 
     }
   
