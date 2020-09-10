@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, ScrollView, Text} from 'react-native';
 import { Card } from 'react-native-elements';
-import { View } from 'react-native-ui-lib';
+import { View, ActionBar } from 'react-native-ui-lib';
 import { colors } from '../../../style';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -9,19 +9,27 @@ import Icon1 from 'react-native-vector-icons/FontAwesome5';
 
 
 
-export default class home extends React.Component{
+export default class HomeScreen extends React.Component{
     constructor(props){
         super(props);
     }
+    
+    static navigationOptions = {
+        title: 'Tank Monitoring System',
+        headerShown:true,       
+        headerStyle: {
+            backgroundColor:'#757575'
+        }
+    }
+    
     render(){
         return(
             <ScrollView style={styles.container}>
 
-                <Card 
-                title='MOTOR STATUS'
-                titleStyle={styles.cardTitle}
+                <Card
                 containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne
                 }]}> 
+                <Card.Title style={styles.cardTitle}>MOTOR STATUS</Card.Title>
                 <View style={{justifyContent:'center',flexDirection:'row-reverse'}}>
                 <View style={styles.IconView}>
                     <Icon name="rocket" size={30} color="#900"/>
@@ -31,9 +39,8 @@ export default class home extends React.Component{
                 </Card>
 
                 <Card 
-                title='FILL LEVEL'
-                titleStyle={styles.cardTitle}
                 containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne}]}>
+                    <Card.Title style={styles.cardTitle}>FILL LEVEL</Card.Title>
                     <View style={{justifyContent:'center',flexDirection:'row-reverse'}}>
                     <View style={styles.IconView}>
                     <Icon name="bomb" size={30} color="#900"/>
@@ -43,9 +50,8 @@ export default class home extends React.Component{
                 </Card>
 
                 <Card
-                title='UPPER THRESHOLD'
-                titleStyle={styles.cardTitle}
                 containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne}]}>
+                    <Card.Title style={styles.cardTitle}>UPPER THRESHOLD</Card.Title>
                     <View style={{justifyContent:'center', flexDirection:'row-reverse'}}>
                     <View style={styles.IconView}>
                     <Icon name="smile-o" size={30} color="#900"/>
@@ -56,9 +62,8 @@ export default class home extends React.Component{
 
 
                 <Card
-                title='LOWER THRESHOLD'
-                titleStyle={styles.cardTitle}
                 containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne}]}>
+                    <Card.Title style={styles.cardTitle}>LOWER THRESHOLD</Card.Title>
                     <View style={{justifyContent:'center', flexDirection:'row-reverse'}}>
                     <View style={styles.IconView}>
                     <Icon1 name="angry" size={30} color="#900"/>
@@ -73,7 +78,8 @@ export default class home extends React.Component{
 }
 const styles = StyleSheet.create({
     container: {
-       flex:1
+       flex:1,
+       backgroundColor:'#FFC107',     
     },
     cardMainContainer: {
         flex:1,
