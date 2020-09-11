@@ -1,9 +1,10 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import login from './../modules/auth/login';
 import TankTabNavigator from './TankTabNavigator';
-
-
+import { TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const App_Stack = createStackNavigator({
     login: {
@@ -25,10 +26,19 @@ const App_Stack = createStackNavigator({
 {
     defaultNavigationOptions: () =>({
      title: 'Tank Monitoring System',
-     headerShown: true,
+     headerShown:true,
+     headerBackImage:false,
      headerStyle: {
-        backgroundColor:'#757575'
-    }
+        backgroundColor:'#fff'
+    },         
+    headerRight:(
+        <TouchableOpacity onPress={()=>this.navigation.navigate('HomeScreen')}>
+               <Icon style={{marginRight:20}}
+               name="notifications" color="red" size={30}/>
+        </TouchableOpacity>
+        
+    )         
+  
     }),
 }
 );
