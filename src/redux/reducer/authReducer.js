@@ -1,4 +1,4 @@
-import {USER_LOADING, LOGIN_SUCESS} from '../action/types';
+import {USER_LOADING, LOGIN_SUCESS, USER_LOADED} from '../action/types';
 
 
 
@@ -18,12 +18,17 @@ const authReducer = (state= initState, action)=> {
                 ...state,
                 isLoading: true               
         }
+        case USER_LOADED:
+            return {
+                ...state,
+                isLoading:false 
+        }
         case LOGIN_SUCESS: 
             return {
                 ...state,
                 isLoading: false,
                 user:action.payload
-            }
+        }
 
         default :
         return state;

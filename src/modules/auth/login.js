@@ -20,8 +20,8 @@ class LoginScreen extends React.Component{
    
 
    async handleSubmit(){  
-      //const {email,password}=this.state;
-     // await this.props.login(this.state.email,this.state.password)
+      const {email,password}=this.state;
+      await this.props.login(this.state.email,this.state.password)
       this.props.navigation.navigate("home") 
     }
     

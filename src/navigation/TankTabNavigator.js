@@ -5,9 +5,9 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { colors } from '../style';
 
 import HomeScreen from '../modules/tankMonitorinSystem/home/HomeView';
-import graphScreen from '../modules/tankMonitorinSystem/charts/graphs';
-import alertScreen from '../modules/tankMonitorinSystem/alerts/recentAlerts';
-import logScreen from '../modules/tankMonitorinSystem/logs/logView';
+// import graphScreen from '../modules/tankMonitorinSystem/charts/graphs';
+// import alertScreen from '../modules/tankMonitorinSystem/alerts/recentAlerts';
+// import logScreen from '../modules/tankMonitorinSystem/logs/logView';
 
 
 const iconHome = require('../../assets/images/tabbar/home.png');
@@ -26,25 +26,9 @@ export default createBottomTabNavigator(
         title: 'Overview'
       },
     },
-    Graphs: {
-      screen: graphScreen,
-      navigationOptions: {
-        title: 'Graphs'
-      },
-     },
-   Alerts: {
-    screen: alertScreen,
-    navigationOptions: {
-    title: 'Recent Alerts'
-    },
+  
   },
-   Logs: {
-    screen: logScreen,
-    navigationOptions: {
-    title: 'Logs'
-    },
-  },
-  },
+  
   {
     defaultNavigationOptions: ({ navigation }) => ({
       // eslint-disable-next-line react/prop-types
@@ -55,15 +39,6 @@ export default createBottomTabNavigator(
           case 'Home':
             iconSource = iconHome;
             break;
-            case 'Graphs':
-              iconSource = iconGraphs;
-              break;
-              case 'Alerts':
-                iconSource = iconAlert;
-                break;
-                case 'Logs':
-                  iconSource = iconCalendar;
-                  break;
           default:
             iconSource = iconComponents;
         }

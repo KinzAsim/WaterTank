@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,Text,StyleSheet} from 'react-native';
+import {View,StyleSheet} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
@@ -11,22 +11,24 @@ export default class graphScreen extends React.Component{
                 {label:'Tank Module 1', value:'Tank module 1'},
                 {label:'Tank Module 2', value:'Tank module 2'},
               ],
+              ChartType: [
+                  {label:'Fill Level Chart',value:'Fill Level Chart'}
+              ],
               selectedModule:0,
               selectedModuleValue: 'Tank module 1',
               loading: true,
-              isDialogVisible1: false,
-              isDialogVisible2: false,
-              sensorIndex: null,
+              selectedTypeValue:'Fill level',
+              selectedType:-1,
               Index:0,
-              country: 'tank'
+              
              }
         
      }
 
     render(){
-        const {ChartList,selectedModuleValue}= this.state;
+        const {ChartList,selectedModuleValue,ChartType}= this.state;
         return(
-            <View style={styles.container}>
+            <View style={styles.container}bounces={false}>
             <View style={styles.container}>
                 <DropDownPicker
             items={ChartList}
@@ -56,10 +58,12 @@ export default class graphScreen extends React.Component{
             }}
            
             ></DropDownPicker>
+
+            <View style={styles.dropcontainer}>
             <DropDownPicker
-            items={ChartList}
+            items={ChartType}
             style={{borderColor:'red'}}
-            defaultValue={selectedModuleValue}
+            defaultValue={selectedTypeValue}
             containerStyle={{
                 height:40, 
                 width:wp('46.3%'),              
@@ -81,6 +85,8 @@ export default class graphScreen extends React.Component{
                 textAlign:'left'                   
             }}
             ></DropDownPicker>
+            </View>
+
             <DropDownPicker
             items={ChartList}
             style={{borderColor:'red '}}
@@ -120,6 +126,6 @@ const styles = StyleSheet.create({
         paddingHorizontal:wp('3.5%')
     },
     dropContainer: {
-        
+        flex:1
     }
 })

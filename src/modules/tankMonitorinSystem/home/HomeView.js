@@ -71,7 +71,7 @@ export default class HomeScreen extends React.Component{
                 <View style={styles.IconView}>
                 <Icon name="rocket" size={30} color="#900"/>
                 </View>
-                   <Text style={styles.text}>This is Home</Text>
+                   <Text style={styles.text}>MOTOR ON</Text>
                 </View>                                    
                 </Card>
 
