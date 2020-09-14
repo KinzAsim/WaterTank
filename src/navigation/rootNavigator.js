@@ -5,9 +5,10 @@ import login from './../modules/auth/login';
 import TankTabNavigator from './TankTabNavigator';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import AuthLoadingScreen from '../modules/auth/AuthLoadingScreen';
 
 const Auth_Stack = createStackNavigator({
-    login: {
+    auth: {
         screen: login,        
     },   
    
@@ -47,8 +48,12 @@ const App_Stack = createStackNavigator({
 export default createAppContainer(
     createSwitchNavigator(
         {
+        AuthLoading:AuthLoadingScreen,    
         auth:Auth_Stack,
         home:App_Stack
+        },
+        {
+            initialRouteName:'AuthLoading',
         }
  )
 );

@@ -9,22 +9,36 @@ import {login} from '../../redux/action/authAction';
 
 
 class LoginScreen extends React.Component{    
-    constructor(props) {
-      super(props);
-      this.state= {
+          state = {
           email: '',
           password: '',
-      }      
-    }
-
-   
-
-   async handleSubmit(){  
-      const {email,password}=this.state;
-      await this.props.login(this.state.email,this.state.password)
-      this.props.navigation.navigate("home") 
-    }
+      };     
     
+
+   UNSAFE_componentWillMount(){
+     const {navigation,isAuthenticated} = this.props;
+
+     if(isAuthenticated)
+     {
+      navigation.navigate("home");
+     }
+   }
+
+   componentDidUpdate(nextProps){
+     const {error,navigation,isAuthenticated} = this.props;
+     
+     if(isAuthenticated)
+     {   
+     navigation.navigate("home");
+     }
+   }
+
+    handleSubmit = () => {  
+      const {email,password} = this.state;
+      this.props.login(email,password);
+      
+    
+  }
   render(){
     return(      
         <KeyboardAvoidingView 
@@ -68,7 +82,13 @@ class LoginScreen extends React.Component{
   }
   }
   
-  export default connect(null,{login})(LoginScreen);
+                const mapStateToProps = (state) => ({
+                  isAuthenticated:state.auth.isAuthenticated,
+                  isLoading: state.auth.isLoading,
+                  error:state.error
+                });
+
+  export default connect(mapStateToProps,{login})(LoginScreen);
   
       const styles = StyleSheet.create({
                   conatiner: {

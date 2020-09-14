@@ -2,6 +2,7 @@ import {USER_LOADING, LOGIN_SUCCESS, url, USER_LOADED} from './types';
 import axios from 'axios';
 
 
+
 export const login = (email, password)=> {
     console.log(email,password);
     return (dispatch, getState)=> {
@@ -20,18 +21,17 @@ export const login = (email, password)=> {
     })
     axios.post(`${url}/user/login`, body, config)
     .then(res=>
-        dispatch({
-            type:LOGIN_SUCCESS,
-            payload:res.data
-        }))
+        dispatch ({
+            type : LOGIN_SUCCESS,
+            payload : res.data
+    }))
     .catch(err => {
-         console.log(err.response.data);
+         //console.log(err.response.data);
     })
 }
 }
 
-export const loadUser = ()=> {
-       console.log("Loader");
+export const loadUser = (token) => {       
     return(dispatch,getState)=> {
         dispatch({
             type: USER_LOADING,
@@ -40,18 +40,20 @@ export const loadUser = ()=> {
 
     const config = {
         headers : {
-          'Content-type':'Application/json'
+          'Content-type':'Application/json',
+          'auth': token
         }
     }
-    axios.get(`${url}/user/loadUser`, config)
-    .then(res=>
+    axios.get(`${url}/user/auth`, config)
+    .then(res=>{
         dispatch({
-            type:USER_LOADED,
-            payload:res.data,
+            type,
+            payload:res.data
 
-        }))
+        })
+    })        
     .catch(err => {
-        console.log("Loader");
+       // console.log(err.response.data);
     })
     }
 }

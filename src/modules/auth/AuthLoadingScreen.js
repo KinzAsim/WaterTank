@@ -5,47 +5,39 @@
  import {connect} from 'react-redux';
 
 
+
 class AuthLoadingScreen extends React.Component{
-     constructor(props){
-         super(props);
-              this.state={
-                   userData:{}
-              }
-     }
+     
     componentDidMount(){
-    this.loaderSubmit();
+    this.submitAsync();
     }
      
     //fetch API
-    componentDidUpdate(){
-       this.props.loaderSubmit
+    componentDidUpdate(prevProps){
+       if(this.props !== prevProps){
+           const{isAuthenticated} = this.props;
+           console.log(isAuthenticated);
+
+           if(isAuthenticated){
+               console.log('authenticated')
+               this.props.navigation.navigate('home');
+           }
+       }
     }
 
-     loaderSubmit=()=> {
-         this.setState.loadUser(getToken)
-             //isLoggingIn: true,            
-         
-     }
- 
-     async storeToken(user){
-         try{
-             await AsyncStorage.setItem("userData");
-             this.props.loadUser(this.storeToken)
-         }
-         catch(error){
-             console.log("Something went wrong", console.error());
-     }}
+     submitAsync = async () => {
+        let userToken = await AsyncStorage.getItem('userToken');
 
-     async getToken(user){
-         try{
-             let userData = await 
-             AsyncStorage.getItem("userData")
-             this.props.loadUser(this.getToken)
-         }
-         catch(error){
-            console.log("Something went wrong", console.error());
-         }
-     }
+                  if(userToken){
+                     await this.props.loadUser(userToken);
+                     this.props.navigation.navigate('home');
+                  }
+                  else{
+                      this.props.navigation.navigate('auth');
+                  }
+     };
+ 
+     
 
      render(){
          return(
@@ -56,4 +48,8 @@ class AuthLoadingScreen extends React.Component{
      }
  }
  
- export default connect(null,{loadUser})(AuthLoadingScreen);
+ const mapStateToProps = (state) => ({
+     isAuthenticated:state.auth.isAuthenticated
+ });
+
+ export default connect(mapStateToProps,{loadUser})(AuthLoadingScreen);
