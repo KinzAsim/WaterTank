@@ -1,30 +1,31 @@
 import React from 'react';
-import {StyleSheet, ScrollView, Text,YellowBox} from 'react-native';
+import {StyleSheet, ScrollView, Text,YellowBox, LogBox} from 'react-native';
 import { Card } from 'react-native-elements';
 import { View, ActionBar } from 'react-native-ui-lib';
 import { colors } from '../../../style';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/FontAwesome5';
+import Icon3 from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { withNavigation } from 'react-navigation';
 import {connect} from 'react-redux';
 import {getSensors} from '../../../redux/action/tankAction';
 
-YellowBox.ignoreWarnings([' Possible Unhandled Promise Rejection']);
+//YellowBox.ignoreWarnings(['']);
+//LogBox.ignoreAllLogs(' Possible Unhandled Promise Rejection');
 
 
  class HomeScreen extends React.Component{
     constructor(props){
         super(props);
         this.state= {
-         List: [
-           {label:'Tank Module 1', value:'Tank module 1'},
-           {label:'Tank Module 2', value:'Tank module 2'},
-         ],
+         Modules: [
+           {label:'Fill Level Module', value:'Fill Level module'}
+        ],
          selectedModule:0,
-         selectedModuleValue: 'Tank module 1',
+         selectedModuleValue: 'Fill Level module',
          loading: true,
          isDialogVisible1: false,
          isDialogVisible2: false,
@@ -42,11 +43,18 @@ YellowBox.ignoreWarnings([' Possible Unhandled Promise Rejection']);
         if(done=='done'){
             console.log('done');
         }
-        
-        const { navigation } = this.props;
-        console.log(navigation);
-        const tab = await this.props.getSensors(user.id);
-    }
+    }   
+        handleSubmit = (item) => {
+           // console.log('list', List);
+            this.setState({
+            selectedModule:item.label,
+            selectedModuleValue:item.value
+            })
+    } 
+    //     const { navigation } = this.props;
+    //     console.log('navigation',navigation);
+    //     const tab = await this.props.getSensors(user.id);
+    // }
 
   
     // handleSubmit = () => {
@@ -57,16 +65,16 @@ YellowBox.ignoreWarnings([' Possible Unhandled Promise Rejection']);
    
     
     render(){
-        const {List,selectedModuleValue} = this.state;
+        const {Modules,selectedModuleValue} = this.state;
         const {user,state,tank} = this.props; 
 
-        console.log('state',state);
-
+        console.log('state',selectedModuleValue);
+        
         return(
             <ScrollView style={styles.container}>
                                
                 <DropDownPicker
-                items={List}
+                items={Modules}
                 defaultValue={selectedModuleValue}
                 style={{borderColor:'purple'}}
                 containerStyle={{
@@ -88,7 +96,8 @@ YellowBox.ignoreWarnings([' Possible Unhandled Promise Rejection']);
                     fontSize:14,
                     textAlign:'left'                   
                 }}
-                //onChangeItem={this.handleSubmit}
+                //mapping
+                onChangeItem={item=> this.handleSubmit(item)}
                 ></DropDownPicker>
 
                 <Card
@@ -99,7 +108,7 @@ YellowBox.ignoreWarnings([' Possible Unhandled Promise Rejection']);
                 <View style={styles.IconView}>
                 <Icon name="rocket" size={30} color="#900"/>
                 </View>
-                   <Text style={styles.text}>MOTOR ON</Text>
+                   <Text style={styles.text}>ON</Text>
                 </View>                                    
                 </Card>
 
@@ -119,9 +128,9 @@ YellowBox.ignoreWarnings([' Possible Unhandled Promise Rejection']);
                     <Card.Title style={styles.cardTitle}>UPPER THRESHOLD</Card.Title>
                     <View style={{justifyContent:'center', flexDirection:'row-reverse'}}>
                     <View style={styles.IconView}>
-                    <Icon name="smile-o" size={30} color="#900"/>
+                    <Icon3 name="graphic-eq" size={30} color="#900"/>
                 </View>
-                    <Text style={styles.text}>This is Ghar</Text>  
+                    <Text style={styles.text}>Set Threshold</Text>  
                     </View>                
                 </Card>
 
@@ -133,7 +142,7 @@ YellowBox.ignoreWarnings([' Possible Unhandled Promise Rejection']);
                     <View style={styles.IconView}>
                     <Icon1 name="angry" size={30} color="#900"/>
                 </View>
-                    <Text style={styles.text}>This is Bangla</Text>  
+                    <Text style={styles.text}>Set Threshold</Text>  
                     </View>                
                 </Card>
                            
@@ -142,13 +151,13 @@ YellowBox.ignoreWarnings([' Possible Unhandled Promise Rejection']);
     }
 }
 
-const mapStateToProps = (state) => ({
-   //state.reducer.variable
-   user:state.auth.user,
-   state:state,
-   tank:state.tank.sensors
-   
-})
+        const mapStateToProps = (state) => ({
+        //state.reducer.variable
+        user:state.auth.user,
+        state:state,
+        tank:state.tank.sensors
+        
+        })
 
 
 export default connect(mapStateToProps,{getSensors})(HomeScreen);
