@@ -26,7 +26,7 @@ const App_Stack = createStackNavigator({
     },
 },
 {
-    defaultNavigationOptions: () =>({
+    defaultNavigationOptions: ({navigation}) =>({
      title: 'Tank Monitoring System',
      headerShown:true,
      headerBackImage:()=>false,

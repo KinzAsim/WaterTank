@@ -1,12 +1,11 @@
 import { 
     USER_LOADING,
     USER_LOADED,
-    REGISTER_SUCCESS,
     LOGIN_SUCCESS,
-    AUTH_ERROR,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_FAIL,
+    AUTH_ERROR,
     LOADING_ERROR,
 } from '../action/types';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -20,20 +19,20 @@ const initState = {
 
 const authReducer = (state = initState, action) => {
     switch(action.type) {
-        case USER_LOADING :
+        case 'USER_LOADING' :
             return {
                 ...state,
                 isLoading : true
             }
-        case USER_LOADED :
+        case 'USER_LOADED' :
+            console.log('load reducer',action.payload)
             return {
                 ...state,
                 isAuthenticated : true,
                 isLoading : false,
                 user : action.payload
             }
-        case REGISTER_SUCCESS :
-        case LOGIN_SUCCESS :
+        case 'LOGIN_SUCCESS' :
 
             AsyncStorage.setItem('userToken', action.payload.token);
 
@@ -43,21 +42,21 @@ const authReducer = (state = initState, action) => {
                 isAuthenticated : true,
                 isLoading : false
             }
-        case AUTH_ERROR :
-        case LOGIN_FAIL :
-        case LOGOUT_SUCCESS :
-        case REGISTER_FAIL :
-            return {
-                ...state,
-                token : null,
-                isAuthenticated : false,
-                isLoading : false,
-            }
-        case LOADING_ERROR:
-            return{
-                ...state,
-                isLoading : false
-            }
+    //    case 'AUTH_ERROR' :
+    //    case 'LOGIN_FAIL' :
+    //     case 'LOGOUT_SUCCESS' :
+    //     //case REGISTER_FAIL :
+    //         return {
+    //             ...state,
+    //             token : null,
+    //             isAuthenticated : false,
+    //             isLoading : false,
+    //         }
+    //     case 'LOADING_ERROR':
+    //         return{
+    //             ...state,
+    //             isLoading : false
+    //         }
         default :
             return state;
     }

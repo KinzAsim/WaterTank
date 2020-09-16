@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, ScrollView, Text} from 'react-native';
+import {StyleSheet, ScrollView, Text,YellowBox} from 'react-native';
 import { Card } from 'react-native-elements';
 import { View, ActionBar } from 'react-native-ui-lib';
 import { colors } from '../../../style';
@@ -8,9 +8,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { withNavigation } from 'react-navigation';
+import {connect} from 'react-redux';
+import {getSensors} from '../../../redux/action/tankAction';
+
+YellowBox.ignoreWarnings([' Possible Unhandled Promise Rejection']);
 
 
-export default class HomeScreen extends React.Component{
+ class HomeScreen extends React.Component{
     constructor(props){
         super(props);
         this.state= {
@@ -30,11 +35,33 @@ export default class HomeScreen extends React.Component{
     }
     
     
+    async componentDidMount () {
+        const {user} = this.props;
+        console.log('user data',user);
+        const done = await this.props.getSensors(user.id);
+        if(done=='done'){
+            console.log('done');
+        }
+        
+        const { navigation } = this.props;
+        console.log(navigation);
+        const tab = await this.props.getSensors(user.id);
+    }
 
-
+  
+    // handleSubmit = () => {
+    //    const {sensors}= this.props;
+    //    const t = sensors.findIndex(i => i.name === selectedModuleValue);
+      
+    // }
+   
     
     render(){
-        const {List,selectedModuleValue}= this.state;
+        const {List,selectedModuleValue} = this.state;
+        const {user,state,tank} = this.props; 
+
+        console.log('state',state);
+
         return(
             <ScrollView style={styles.container}>
                                
@@ -61,6 +88,7 @@ export default class HomeScreen extends React.Component{
                     fontSize:14,
                     textAlign:'left'                   
                 }}
+                //onChangeItem={this.handleSubmit}
                 ></DropDownPicker>
 
                 <Card
@@ -113,6 +141,19 @@ export default class HomeScreen extends React.Component{
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+   //state.reducer.variable
+   user:state.auth.user,
+   state:state,
+   tank:state.tank.sensors
+   
+})
+
+
+export default connect(mapStateToProps,{getSensors})(HomeScreen);
+
+
 const styles = StyleSheet.create({
     container: {
        flex:1,
