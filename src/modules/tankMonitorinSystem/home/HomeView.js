@@ -30,7 +30,7 @@ import {getSensors} from '../../../redux/action/tankAction';
          isDialogVisible1: false,
          isDialogVisible2: false,
          sensorIndex: null,
-         Index:0,
+         Index:2,
          country: 'tank'
         }
     }
@@ -46,29 +46,20 @@ import {getSensors} from '../../../redux/action/tankAction';
     }   
         handleSubmit = (item) => {
            // console.log('list', List);
+           const {tank} = this.props;
+           const i = tank.findIndex(x => x.name === item.value);
+           console.log('sensor',i);
             this.setState({
             selectedModule:item.label,
-            selectedModuleValue:item.value
+            selectedModuleValue:item.value,
+            Index:i
             })
-    } 
-    //     const { navigation } = this.props;
-    //     console.log('navigation',navigation);
-    //     const tab = await this.props.getSensors(user.id);
-    // }
-
-  
-    // handleSubmit = () => {
-    //    const {sensors}= this.props;
-    //    const t = sensors.findIndex(i => i.name === selectedModuleValue);
-      
-    // }
-   
-    
+    }
     render(){
-        const {Modules,selectedModuleValue} = this.state;
+        const {Modules,selectedModuleValue,Index} = this.state;
         const {user,state,tank} = this.props; 
-
-        console.log('state',selectedModuleValue);
+        //console.log('state',tank);
+        // console.log(tank[Index].fillLevel1);
         
         return(
             <ScrollView style={styles.container}>
@@ -101,18 +92,50 @@ import {getSensors} from '../../../redux/action/tankAction';
                 ></DropDownPicker>
 
                 <Card
-                containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne
-                }]}> 
-                <Card.Title style={styles.cardTitle}>MOTOR STATUS</Card.Title>
+                containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne                
+                }]}
+                > 
+                <Card.Title style={styles.cardTitle}>UPPER TANK FILLLEVEL</Card.Title>
                 <View style={{justifyContent:'center',flexDirection:'row-reverse'}}>
                 <View style={styles.IconView}>
                 <Icon name="rocket" size={30} color="#900"/>
                 </View>
-                   <Text style={styles.text}>ON</Text>
+                   <Text style={styles.text}>{tank[Index].fillLevel}</Text>
                 </View>                                    
                 </Card>
 
-                <Card 
+
+                <Card
+                containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne}]}>
+                    <Card.Title style={styles.cardTitle}>LOWER TANK FILLLEVEL</Card.Title>
+                    <View style={{justifyContent:'center', flexDirection:'row-reverse'}}>
+                    <View style={styles.IconView}>
+                    <Icon3 name="graphic-eq" size={30} color="#900"/>
+                </View>
+                    <Text              
+                    style={styles.text}>{tank[Index].fillLevel1}</Text>  
+                    </View>                
+                </Card>
+
+
+                <Card
+                containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne}]}>
+                    <Card.Title style={styles.cardTitle}>MOTOR STATUS</Card.Title>
+                    <View style={{justifyContent:'center', flexDirection:'row-reverse'}}>
+                    <View style={styles.IconView}>
+                    <Icon3 name="graphic-eq" size={30} color="#900"/>
+                </View>
+                {tank[Index].motor === 1 ?
+                (<Text 
+                style={styles.text}>ON</Text>) :
+                (
+                    <Text 
+                style={styles.text}>OFF</Text>)
+                }                     
+                </View>                
+                </Card>
+
+                {/* <Card 
                 containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne}]}>
                     <Card.Title style={styles.cardTitle}>FILL LEVEL</Card.Title>
                     <View style={{justifyContent:'center',flexDirection:'row-reverse'}}>
@@ -121,30 +144,9 @@ import {getSensors} from '../../../redux/action/tankAction';
                 </View>
                     <Text style={styles.text}>This is House</Text>  
                     </View>                                    
-                </Card>
+                </Card> */}
 
-                <Card
-                containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne}]}>
-                    <Card.Title style={styles.cardTitle}>UPPER THRESHOLD</Card.Title>
-                    <View style={{justifyContent:'center', flexDirection:'row-reverse'}}>
-                    <View style={styles.IconView}>
-                    <Icon3 name="graphic-eq" size={30} color="#900"/>
-                </View>
-                    <Text style={styles.text}>Set Threshold</Text>  
-                    </View>                
-                </Card>
-
-
-                <Card
-                containerStyle={[styles.cardMainContainer,{backgroundColor:colors.whiteOne,borderColor:colors.whiteOne}]}>
-                    <Card.Title style={styles.cardTitle}>LOWER THRESHOLD</Card.Title>
-                    <View style={{justifyContent:'center', flexDirection:'row-reverse'}}>
-                    <View style={styles.IconView}>
-                    <Icon1 name="angry" size={30} color="#900"/>
-                </View>
-                    <Text style={styles.text}>Set Threshold</Text>  
-                    </View>                
-                </Card>
+                
                            
             </ScrollView>
         );
@@ -155,8 +157,7 @@ import {getSensors} from '../../../redux/action/tankAction';
         //state.reducer.variable
         user:state.auth.user,
         state:state,
-        tank:state.tank.sensors
-        
+        tank:state.tank.sensors        
         })
 
 

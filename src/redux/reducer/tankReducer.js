@@ -6,12 +6,12 @@ const initState = {
 const tankReducer = (state = initState, action) => {
     //console.log(action.payload);
     switch(action.type){
-        case 'SENSORS_LOADING':
+        case 'SENSOR_LOADING':
             return {
               ...state,
               sensorLoading: true
             }
-        case 'GET_SENSORS':
+        case 'GET_SENSOR':
             return {
                 ...state,
                 sensorLoading: false,

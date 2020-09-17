@@ -15,6 +15,7 @@ export const getSensors = (id) => (dispatch,getState) => new Promise(async funct
 
     try{
         const data = await axios.get(`${url}/rs/${id}`, config)
+        //console.log('sensor data',data.data)
         dispatch({
             type: 'GET_SENSOR',
             payload: data.data
