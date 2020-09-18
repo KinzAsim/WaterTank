@@ -21,10 +21,12 @@ export const login = (email, password)=> {
     })
     axios.post(`${url}/user/login`, body, config)
     .then(res=>
+        //console.log('action',res.data)
         dispatch ({
             type : 'LOGIN_SUCCESS',
             payload : res.data
-    }))
+    })
+    )
     .catch(err => {
          //console.log(err.response.data);
     });

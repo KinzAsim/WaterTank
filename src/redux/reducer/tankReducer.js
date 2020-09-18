@@ -16,7 +16,8 @@ const tankReducer = (state = initState, action) => {
                 ...state,
                 sensorLoading: false,
                 sensors:action.payload
-            } 
+            }
+        
         default: 
             return state;   
     }

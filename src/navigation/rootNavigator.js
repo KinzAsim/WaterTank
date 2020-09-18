@@ -36,7 +36,7 @@ const App_Stack = createStackNavigator({
     headerRight:()=>(
         <TouchableOpacity onPress={()=>this.navigation.navigate('HomeScreen')}>
                <Icon style={{marginRight:20}}
-               name="notifications" color="red" size={30}/>
+               name="notifications" color="#0F5E9C" size={30}/>
         </TouchableOpacity>
         
     )         
