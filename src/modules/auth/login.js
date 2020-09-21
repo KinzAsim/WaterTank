@@ -45,7 +45,7 @@ class LoginScreen extends React.Component{
                           style={styles.conatiner}>   
 
                 <View style={styles.iconView}>               
-                         <Icon style={styles.icon} name="user" size={30} color="#757575"/>
+                         <Icon style={styles.icon} name="user" size={30} color="#2389DA"/>
                 </View>
 
          
@@ -73,7 +73,7 @@ class LoginScreen extends React.Component{
                  
   
                        <TouchableOpacity style={styles.loginbtn} onPress={()=>this.handleSubmit()}>
-                          <Text style={{color:'#192f6a'}}>Login</Text>
+                          <Text style={{color:'#2389DA'}}>Login</Text>
                        </TouchableOpacity> 
                   
            </KeyboardAvoidingView>                                                     
@@ -95,7 +95,7 @@ class LoginScreen extends React.Component{
                     flex: 1,
                     justifyContent:'center',
                     alignItems:'center',
-                    backgroundColor:'#FFC107',                    
+                    backgroundColor:'#000',                    
                    },
                   
                   input: {
@@ -103,7 +103,7 @@ class LoginScreen extends React.Component{
                     borderWidth:1,
                     borderColor:'transparent',
                     color:'white',
-                    backgroundColor:'rgba(25, 47, 106,0.5)',
+                    backgroundColor:'#2389DA',
                     width: wp('80%'),
                     height:hp('7%'),
                     marginTop:20,

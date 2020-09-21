@@ -27,3 +27,15 @@ export const getSensors = (id) => (dispatch,getState) => new Promise(async funct
         reject(err);
     }
 });
+
+export const updateSensors = (data) => {
+    console.log('data',data)
+    if(data.fillLevel !== undefined){
+        console.log('data',data)
+        // dispatch ({
+        //     type:'UPADATE_FILLLEVEL',
+        //     payload:data
+        // })
+    }
+    
+}

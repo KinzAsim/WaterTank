@@ -12,7 +12,7 @@ export default class logScreen extends React.Component{
         return(
             <View>
                 <Text>
-                    Hunh ;////
+                    Logs
                 </Text>
             </View>
         );

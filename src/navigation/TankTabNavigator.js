@@ -3,12 +3,11 @@ import React from 'react';
 import { Image, View, StyleSheet, Text } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { colors } from '../style';
-
+import NotificationPusher from './notificationpusher';
 import HomeScreen from '../modules/tankMonitorinSystem/home/HomeView';
+import logScreen from '../modules/tankMonitorinSystem/logs/logView';
 // import graphScreen from '../modules/tankMonitorinSystem/charts/graphs';
 // import alertScreen from '../modules/tankMonitorinSystem/alerts/recentAlerts';
-// import logScreen from '../modules/tankMonitorinSystem/logs/logView';
-
 
 const iconHome = require('../../assets/images/tabbar/home.png');
 const iconAlert = require('../../assets/images/tabbar/alert.png');
@@ -25,8 +24,16 @@ export default createBottomTabNavigator(
       navigationOptions: {
         title: 'Overview'
       },
-    },
-  
+    }, 
+      Logs: {
+        screen : logScreen,
+        navigationOptions: {
+          title: 'Logs'
+        }
+     },
+    // notificationPusher : {
+    //   screen: NotificationPusher,
+    // },    
   },
   
   {
@@ -37,6 +44,9 @@ export default createBottomTabNavigator(
         let iconSource;
         switch (routeName) {
           case 'Home':
+            iconSource = iconHome;
+            break;
+          case 'Logs':
             iconSource = iconHome;
             break;
           default:
@@ -59,13 +69,16 @@ export default createBottomTabNavigator(
     tabBarOptions: {
       showLabel: true,
       style: {
-        backgroundColor: colors.background,
+        backgroundColor:'#000'
       },
       labelStyle: {
-        color: colors.Text
+        color: '#fff'
       },
     },
   },
+  // {
+  //   initialRouteName:'notificationPusher'
+  // }
 );
 
 const styles = StyleSheet.create({
@@ -80,7 +93,7 @@ const styles = StyleSheet.create({
     height: 23,
   },
   tabBarIconFocused: {
-    tintColor: colors.primary,
+    tintColor: '#2389DA',
   },
   headerContainer: {
     height: 70,

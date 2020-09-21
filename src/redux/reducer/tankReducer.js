@@ -17,6 +17,11 @@ const tankReducer = (state = initState, action) => {
                 sensorLoading: false,
                 sensors:action.payload
             }
+        case 'UPDATE_FILLLEVEL':
+            return {
+                ...state,
+                sensors:action.payload.fillLevel
+            }
         
         default: 
             return state;   

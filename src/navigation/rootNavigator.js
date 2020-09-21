@@ -3,9 +3,12 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import login from './../modules/auth/login';
 import TankTabNavigator from './TankTabNavigator';
-import { TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import AuthLoadingScreen from '../modules/auth/AuthLoadingScreen';
+import NotificationIcon from './notificationIcon';
+import logScreen from '../modules/tankMonitorinSystem/logs/logView';
+import NotificationView from '../modules/notification/notificationView';
+import notificationVI from '../modules/notification/notificationVI';
+
 
 const Auth_Stack = createStackNavigator({
     auth: {
@@ -24,33 +27,44 @@ const App_Stack = createStackNavigator({
     home: {
         screen: TankTabNavigator        
     },
+    log:{
+        screen: logScreen,  
+    },
+    notification: {
+        screen: NotificationView
+    }
 },
 {
     defaultNavigationOptions: ({navigation}) =>({
      title: 'Tank Monitoring System',
+
+    headerTitleStyle: {
+     color:'white'
+    },
      headerShown:true,
+     
      headerBackImage:()=>false,
+
      headerStyle: {
-        backgroundColor:'#fff'
-    },         
-    headerRight:()=>(
-        <TouchableOpacity onPress={()=>this.navigation.navigate('HomeScreen')}>
-               <Icon style={{marginRight:20}}
-               name="notifications" color="#0F5E9C" size={30}/>
-        </TouchableOpacity>
-        
-    )         
+        backgroundColor:'#000',   
+    }, 
+            
+    headerRight:()=>  <NotificationIcon navigationProps={navigation}/>        
   
     }),
 }
 );
+
+
 
 export default createAppContainer(
     createSwitchNavigator(
         {
         AuthLoading:AuthLoadingScreen,    
         auth:Auth_Stack,
-        home:App_Stack
+        home:App_Stack,
+        log:App_Stack,
+        notification:App_Stack
         },
         {
             initialRouteName:'AuthLoading',
