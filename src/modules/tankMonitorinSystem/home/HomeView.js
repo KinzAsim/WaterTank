@@ -130,7 +130,7 @@ import {getSensors} from '../../../redux/action/tankAction';
                     </Svg> */}
 
                     <Card
-                    containerStyle={[styles.cardMainContainer,{backgroundColor:'#000',borderColor:'#2389DA', marginTop:300,height:70
+                    containerStyle={[styles.cardMainContainer,{backgroundColor:'#000',borderColor:'#2389DA', marginTop:250,height:70
                     }]}
                     > 
                     <Card.Title style={styles.cardTitle}>UPPER TANK FILLLEVEL</Card.Title>
@@ -293,6 +293,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     drop: {
+        marginTop:50,
         backgroundColor:'#000',
         justifyContent:'center',
         alignItems:'center',

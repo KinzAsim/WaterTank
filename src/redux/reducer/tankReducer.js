@@ -10,7 +10,7 @@ const tankReducer = (state = initState, action) => {
             return {
               ...state,
               sensorLoading: true
-            }
+            } 
         case 'GET_SENSOR':
             return {
                 ...state,
@@ -18,6 +18,7 @@ const tankReducer = (state = initState, action) => {
                 sensors:action.payload
             }
         case 'UPDATE_FILLLEVEL':
+
             return {
                 ...state,
                 sensors:action.payload.fillLevel

@@ -11,7 +11,8 @@ export default class NotificationItem extends React.Component{
 
     render(){
 
-       const {id, title}= this.props;
+       const {id}= this.props;
+        console.log('updateId',id);
 
         return(
             <View style={styles.container}>

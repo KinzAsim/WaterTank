@@ -7,7 +7,7 @@ import AuthLoadingScreen from '../modules/auth/AuthLoadingScreen';
 import NotificationIcon from './notificationIcon';
 import logScreen from '../modules/tankMonitorinSystem/logs/logView';
 import NotificationView from '../modules/notification/notificationView';
-import notificationVI from '../modules/notification/notificationVI';
+import NotificationPusher from './notificationpusher';
 
 
 const Auth_Stack = createStackNavigator({
@@ -32,6 +32,9 @@ const App_Stack = createStackNavigator({
     },
     notification: {
         screen: NotificationView
+    },
+    pusher : {
+        screen: NotificationPusher
     }
 },
 {
@@ -64,7 +67,8 @@ export default createAppContainer(
         auth:Auth_Stack,
         home:App_Stack,
         log:App_Stack,
-        notification:App_Stack
+        notification:App_Stack,
+        pusher:App_Stack
         },
         {
             initialRouteName:'AuthLoading',

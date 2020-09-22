@@ -31,9 +31,9 @@ export default createBottomTabNavigator(
           title: 'Logs'
         }
      },
-    // notificationPusher : {
-    //   screen: NotificationPusher,
-    // },    
+    notificationPusher : {
+      screen: NotificationPusher,
+    },    
   },
   
   {
@@ -76,9 +76,9 @@ export default createBottomTabNavigator(
       },
     },
   },
-  // {
-  //   initialRouteName:'notificationPusher'
-  // }
+  {
+    initialRouteName:"notificationPusher"
+  }
 );
 
 const styles = StyleSheet.create({
